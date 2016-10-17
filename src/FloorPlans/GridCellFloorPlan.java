@@ -16,11 +16,14 @@ public class GridCellFloorPlan implements FloorPlan {
 	
 	
 	public GridCellFloorPlan(int[][] floorPlanInfo){
-		int length = floorPlanInfo.length;
-		int width = floorPlanInfo[0].length;
-		this.grid = new int[length][width];
-		for(int i = 0; i< length; i ++){
-			for(int j = 0 ; j < width; j++){
+		System.out.println("creating gridcell floor plan");
+		int width = floorPlanInfo.length;
+		int length = floorPlanInfo[0].length;
+		this.grid = new int[width][length];
+		for(int i = 0; i< width; i ++){
+			System.out.println();
+			for(int j = 0 ; j < length; j++){
+				System.out.print(floorPlanInfo[i][j]);;
 				this.grid[i][j] = floorPlanInfo[i][j]; 
 			}
 		}
