@@ -32,8 +32,6 @@ public class BasicFloorPlanImpl implements FloorPlan {
 		
 	}
 	
-	
-
 	@Override
 	public int getFloorType(int x, int y) {
 		if(this.grid.containsKey(toString(x,y))){
@@ -55,6 +53,18 @@ public class BasicFloorPlanImpl implements FloorPlan {
 	public void updateCurrentLocation(int x, int y) {
 		this.currentX = x;
 		this.currentY = y;
+	}
+
+	@Override
+	public String[] getNextAvailableStep() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getSurroundingUnknown() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
