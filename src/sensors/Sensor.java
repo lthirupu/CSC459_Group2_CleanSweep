@@ -10,6 +10,7 @@ class Sensor {
 	
 	 private static Sensor sensor = new Sensor( );
 	 private static int powerLevel = 100 ;
+	 static boolean fullFlag = false;
 
 	  
 	   private Sensor() { }
@@ -56,10 +57,9 @@ class Sensor {
 	   }
 	   
 	   public boolean isFull(){
-		   Random random = new Random();
-		   int randomNum = random.nextInt((100 - 1) + 1) + 1;
+
 		   
-		   if(randomNum <= 10){
+		   if(fullFlag){
 			   return true;
 		   }else{
 			   return false;
@@ -69,6 +69,24 @@ class Sensor {
 	   public int power(){
 		   return(powerLevel--);
 		   
+	   }
+	   
+	   public void ManageDirtUnit(){
+		   
+		   new Thread(){
+			   int max = 50;
+			   int count = max;
+			   private Sensor s = Sensor.getInstance();
+			   
+			   public void run() {
+				   while(count > 0){
+					   if(!s.isClean()){
+						   count--;
+					   }
+				   }
+				   s.fullFlag = true;
+			     
+			   }}.start();
 	   }
 	   
 	   

@@ -8,6 +8,10 @@ class SensorAPI {
 	
 	private static Sensor s = Sensor.getInstance();
 	
+	SensorAPI(){
+		s.ManageDirtUnit();
+	}
+	
 	/**
 	 * Obstacle(): return true if there is an obstacle in front and false otherwise.
 	 * 
