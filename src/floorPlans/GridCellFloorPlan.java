@@ -1,48 +1,37 @@
 /*This floorplan uses a two dimentional array to represent the floorplan.
- * Index 0 represent obstacles, 1 represent bare floor, 2 represent low-pile,
- *  3 represent high-pile, index 4 represent stair. 5 represent unknown, 
- *  6 represent charge station.
+ * each cell consist an tile object.
+ * a tile object contains information on floortype, north,south,east,west obstacles.
+ * 
  */
 
-package FloorPlans;
+package floorPlans;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class GridCellFloorPlan implements FloorPlan {
-	
-	private int [][] grid;
+
+	private Tile [][] grid;
 	private int currentX;
 	private int currentY;
 	
 	
-	public GridCellFloorPlan(int[][] floorPlanInfo){
-		System.out.println("creating gridcell floor plan");
-		int width = floorPlanInfo.length;
-		int length = floorPlanInfo[0].length;
-		this.grid = new int[width][length];
-		for(int i = 0; i< width; i ++){
-			System.out.println();
-			for(int j = 0 ; j < length; j++){
-				System.out.print(floorPlanInfo[i][j]);;
-				this.grid[i][j] = floorPlanInfo[i][j]; 
-			}
-		}
+	private static GridCellFloorPlan instance = null;
+	public static synchronized GridCellFloorPlan getInstance(Tile[][] floorPlanInfo){
+		if(instance == null) instance = new GridCellFloorPlan();
+		return instance;
 	}
+	private GridCellFloorPlan(){
+	}
+	
 
-	@Override
-	public void registerFloorType(int x, int y, int type) {
-		if(this.grid[x][y]== 5){
-		this.grid[x][y] = type;
-		}
-		else{
-			this.grid[x][y] = type;
-		}
-		
-	}
+	
+	
 
 	@Override
 	public int getFloorType(int x, int y) {
-		return this.grid[x][y];
+		return this.grid[x][y].getSurfaceType();
 	}
 
 	@Override
@@ -61,71 +50,49 @@ public class GridCellFloorPlan implements FloorPlan {
 		
 	}
 
+	
+	
+	/*
+	 * return an array list of charge station locations,
+	 * the string format is "x,y".
+	 */
 	@Override
-	public String[] getNextAvailableStep() {
-		int  x= 0;
-		String[] temp = new String[4];
-		if(isOpen(this.currentX,this.currentY+1)){
-			temp[x] = "up";
-					x++;
-		}else if(isOpen(this.currentX+1,this.currentY)){
-			temp[x] = "right";
-			x++;
+	public ArrayList<String> getChargeStations() {
+	    ArrayList<String> chargeStations = new ArrayList<String>();
+		for(int i = 0; i< this.grid.length;i++){
+			for(int j = 0; j<this.grid[0].length;j++){
+				if(this.grid[i][j].getChargeStation()== true) chargeStations.add(i+","+j); 
+			}
 		}
-		else if(isOpen(this.currentX,this.currentY-1)){
-			temp[x] = "down";
-			x++;
-		}
-		else if(isOpen(this.currentX-1,this.currentY)){
-			temp[x] = "left";
-			
-		}
-		return temp;
-				
 		
+		return chargeStations;
 	}
 	@Override
-	public String[] getSurroundingUnknown() {
-		int  x= 0;
-		String[] temp = new String[4];
-		if(isUnknown(this.currentX,this.currentY+1)){
-			temp[x] = "up";
-					x++;
-		}else if(isUnknown(this.currentX+1,this.currentY)){
-			temp[x] = "right";
-			x++;
-		}
-		else if(isUnknown(this.currentX,this.currentY-1)){
-			temp[x] = "down";
-			x++;
-		}
-		else if(isUnknown(this.currentX-1,this.currentY)){
-			temp[x] = "left";
-			
-		}
-		return temp;
-				
+	public int getFrontPath() {
+		return this.grid[currentX][currentY].getFrontPath();
 	}
-	
-	
-	private boolean isUnknown(int x, int y){
-		
-		if(this.grid[x][y] == 5){
-			return true;
-			
-		}
-		return false;
+	@Override
+	public int getBackPath() {
+		return this.grid[currentX][currentY].getBackPath();
+	}
+	@Override
+	public int getLeftPath() {
+		return this.grid[currentX][currentY].getLeftPath();
+	}
+	@Override
+	public int getRightPath() {
+		return this.grid[currentX][currentY].getRightPath();
+	}
+	@Override
+	public void registerTile(int x, int y, Tile tile) {
+		this.grid[x][y]= tile;
 		
 	}
-	
-	private boolean isOpen(int x, int y){
-		if(this.grid[x][y]==0 || this.grid[x][y] == 4){
-			return false;
-		}
-		else{
-			return true;
-		}
+	@Override
+	public int getDirtAmount(int x, int y) {
+		return this.grid[x][y].getDirtAmount();
 	}
+	
 
 	
 

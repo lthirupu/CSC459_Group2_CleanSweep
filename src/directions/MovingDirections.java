@@ -1,6 +1,6 @@
-package Directions;
+package directions;
 
-import FloorPlans.*;
+import floorPlans.*;
 import sensors.*;
 
 public class MovingDirections {

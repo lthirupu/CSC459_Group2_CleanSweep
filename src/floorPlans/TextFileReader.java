@@ -1,4 +1,4 @@
-package FloorPlans;
+package floorPlans;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
