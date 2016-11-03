@@ -102,12 +102,11 @@ public class GridCellFloorPlan implements FloorPlan {
 	
 	public String getNearestChargeStation(double MaxDis){
 		
-	   	ArrayList<String> cs = getChargeStations();
+	    ArrayList<String> cs = getChargeStations();
         List<Point2D> points = new ArrayList<Point2D>();
         
         for(String s : cs){
-        	points.add(new Point2D.Double( Integer.parseInt(s.substring(0, s.indexOf(','))), Integer.parseInt(s.substring(s.indexOf(',')+1, s.length()))) );
-    		 
+        	points.add(new Point2D.Double( Integer.parseInt(s.substring(0, s.indexOf(','))), Integer.parseInt(s.substring(s.indexOf(',')+1, s.length()))) );	 
     	  }
 
         Point2D myPoint = new Point2D.Double(getCurrentLocation()[0],getCurrentLocation()[1]);
@@ -126,10 +125,6 @@ public class GridCellFloorPlan implements FloorPlan {
             index++;
         }
         List<Point2D> result = points.subList(0, index);
-        System.out.println(
-            "The closest points with distance <="+maxDistance+" are "+result);
-        System.out.println(result.toString());
-        
 		return String.valueOf(result.get(0).getX()) +","+String.valueOf(result.get(0).getY()) ;
     }
 	// Do Not Worry About It
