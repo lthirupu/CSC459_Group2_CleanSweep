@@ -1,6 +1,7 @@
 package directions;
 
-import floorPlans.*;
+import floorPlanManager.Coordinate;
+import floorPlanManager.FloorPlanManager;
 import sensors.*;
 
 public class MovingDirections {
@@ -13,26 +14,27 @@ public class MovingDirections {
 		sensor.rightObstacle();
 	}
 
-	public String getDirections(FloorPlan floorPlan, SensorAPI sensor) {
+	public String getDirections(FloorPlanManager floorPlan, SensorAPI sensor) {
 
 		findObstacles(sensor);
-		int floorArray[] =  new int[2];
-		floorArray = floorPlan.getCurrentLocation();
+		Coordinate co = new Coordinate();
+		co = floorPlan.getCurrentLocation();
 		if (!sensor.isFrontSensor() && !sensor.isBottomSensor()) { 
-			floorPlan.updateCurrentLocation(floorArray[0], floorArray[1] + 1);
+			
+			floorPlan.setCurrentLocation(co.getX(),co.getY());
 			return "FRONT";
 		}
 		else {
 			if(!sensor.isLeftSensor()) {
-				floorPlan.updateCurrentLocation(floorArray[0] - 1, floorArray[1]);
+				floorPlan.setCurrentLocation(co.getX() - 1, co.getY());
 				return "LEFT";
 			}
 			else if (!sensor.isRightSensor()) {
-				floorPlan.updateCurrentLocation(floorArray[0] + 1, floorArray[1]);
+				floorPlan.setCurrentLocation(co.getX() + 1, co.getY());
 				return "RIGHT";
 			}
 			else if (!sensor.isRearSensor()) {
-				floorPlan.updateCurrentLocation(floorArray[0], floorArray[1] - 1);
+				floorPlan.setCurrentLocation(co.getX(), co.getY());
 				return "BACK";
 			}
 			if(sensor.isFrontSensor() && sensor.isBottomSensor() && sensor.isLeftSensor() && sensor.isRightSensor() && sensor.isRearSensor()) {

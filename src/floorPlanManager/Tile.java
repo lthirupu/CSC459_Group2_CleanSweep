@@ -1,4 +1,4 @@
-package floorPlans;
+package floorPlanManager;
 /*FloorType:
  * 1 represent bare floor, 2 represent low-pile,
  * 3 represent high-pile
