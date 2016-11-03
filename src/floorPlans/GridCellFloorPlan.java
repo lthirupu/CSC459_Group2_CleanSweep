@@ -93,6 +93,62 @@ public class GridCellFloorPlan implements FloorPlan {
 		return this.grid[x][y].getDirtAmount();
 	}
 	
+		/*
+	 * getNearestChargeStation(double MaxDis): 
+	 * Return the nearest charge station locations,the string format is "x,y".
+	 * 
+	 * MaxDis: The maximum range ; "look for station in this range"
+	 */
+	
+	public String getNearestChargeStation(double MaxDis){
+		
+	   	ArrayList<String> cs = getChargeStations();
+        List<Point2D> points = new ArrayList<Point2D>();
+        
+        for(String s : cs){
+        	points.add(new Point2D.Double( Integer.parseInt(s.substring(0, s.indexOf(','))), Integer.parseInt(s.substring(s.indexOf(',')+1, s.length()))) );
+    		 
+    	  }
+
+        Point2D myPoint = new Point2D.Double(getCurrentLocation()[0],getCurrentLocation()[1]);
+        
+        Collections.sort(points, createComparator(myPoint));
+
+        double maxDistance = MaxDis;
+        
+        int index = 0;
+        for (Point2D p : points)
+        {
+            if (p.distanceSq(myPoint) > maxDistance * maxDistance)
+            {
+                break;
+            }
+            index++;
+        }
+        List<Point2D> result = points.subList(0, index);
+        System.out.println(
+            "The closest points with distance <="+maxDistance+" are "+result);
+        System.out.println(result.toString());
+        
+		return String.valueOf(result.get(0).getX()) +","+String.valueOf(result.get(0).getY()) ;
+    }
+	// Do Not Worry About It
+    private static Comparator<Point2D> createComparator(Point2D p)
+    {
+        final Point2D finalP = new Point2D.Double(p.getX(), p.getY());
+        return new Comparator<Point2D>()
+        {
+            @Override
+            public int compare(Point2D p0, Point2D p1)
+            {
+                double ds0 = p0.distanceSq(finalP);
+                double ds1 = p1.distanceSq(finalP);
+                return Double.compare(ds0, ds1);
+            }
+
+        };
+	}
+
 
 	
 
