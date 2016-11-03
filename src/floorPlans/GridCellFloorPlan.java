@@ -95,7 +95,7 @@ public class GridCellFloorPlan implements FloorPlan {
 	
 		/*
 	 * getNearestChargeStation(double MaxDis): 
-	 * Return the nearest charge station locations,the string format is "x,y".
+	 * Return the nearest charge station location,the string format is "x,y".
 	 * 
 	 * MaxDis: The maximum range ; "look for station in this range"
 	 */
