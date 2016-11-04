@@ -3,29 +3,31 @@ package control;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import floorPlans.GridCellFloorPlan;
+import floorPlanManager.Coordinate;
+import floorPlanManager.FloorPlanManager;
+
 import sensors.SensorAPI;
 
 public class NavigationLogic {
-	private GridCellFloorPlan floorPlan;
+	private FloorPlanManager fpm = FloorPlanManager.getInstance();
 	private SensorAPI sensor;
-	private int[] currentLocation;
-	private Stack<int[]> stack;
-	private ArrayList<int[]> visited;
-	public NavigationLogic(GridCellFloorPlan floorPlan, SensorAPI sensor){
-		this.floorPlan = floorPlan;
+	private Coordinate currentLocation;
+	private Stack<Coordinate> stack;
+	private ArrayList<Coordinate> visited;
+	public NavigationLogic(SensorAPI sensor){
+	
 		this.sensor = sensor;
 	}
 	
 	public void start(){
 		
-		currentLocation = floorPlan.getCurrentLocation();
+		currentLocation = fpm.getCurrentLocation();
 		stack.push(currentLocation);
 		while(!stack.isEmpty()){
-			int []nextStep = stack.pop();
+			Coordinate nextStep = stack.pop();
 			if(!visited.contains(nextStep)){
-				floorPlan.updateCurrentLocation(nextStep[0], nextStep[1]);
-				getAvailablePath();
+				fpm.setCurrentLocation(nextStep.getX(), nextStep.getY());
+				fpm.getOpenNeighbor(nextStep);
 				visited.add(nextStep);
 			}
 			
@@ -35,7 +37,7 @@ public class NavigationLogic {
 	}
 
 	private void getAvailablePath() {
-		if(floorPlan.getFrontPath()==0||floorPlan.getFrontPath()==1){
+		/*if(fpm.getOpenNeighbor(co)==0||fpm.getFrontPath()==1){
 			int[] temp = new int[2];
 			temp[0] = currentLocation[0];
 			temp[1] = currentLocation[1]+1;
@@ -59,6 +61,7 @@ public class NavigationLogic {
 					temp[1] = currentLocation[1];
 					stack.push(temp);
 					}
+					*/
 	}
 
 }

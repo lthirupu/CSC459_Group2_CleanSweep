@@ -18,8 +18,8 @@ public class Tile {
 	private boolean isChargeStation;
 	private int dirtAmount;
 	
-	public Tile(int surfaceType, int frontPath, int backPath,
-			int leftPath,int rightPath,boolean isChargeStation,int dirtAmount){
+	public Tile(int surfaceType, int frontPath, int rightPath,
+			int backPath,int leftPath,boolean isChargeStation,int dirtAmount){
 		setSurfaceType(surfaceType);
 		setFrontPath(frontPath);
 		setBackPath(backPath);
