@@ -100,8 +100,8 @@ public class Floor {
 			System.out.println(left);
 			temp.add(left);
 		}
-		System.out.println(co.getStringXY());
-		System.out.println(temp);
+		//System.out.println(co.getStringXY());
+		//System.out.println(temp);
 		return temp;
 		
 	}

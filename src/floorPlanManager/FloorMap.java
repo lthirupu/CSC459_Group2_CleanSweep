@@ -16,12 +16,12 @@ public class FloorMap {
 		//System.out.println(tiles);
 		for(String tile: tiles){
 			Vertex node = new Vertex(tile,tile);
-			System.out.println(tile);
+			//System.out.println(tile);
 			this.nodes.add(node);
 		    Coordinate co = new Coordinate();
 		    co.setString(tile);
 			Set<String> neighbors = fl.getOpenNeighbor(co);
-			System.out.println(neighbors);
+			//System.out.println(neighbors);
 			for(String neighbor: neighbors){
 				Coordinate nei = new Coordinate();
 				nei.setString(neighbor);
