@@ -12,8 +12,12 @@ package floorPlanManager;
  * 0 = clean
  */
 
+import powermanagement.FloorType;
+
 public class Tile {
 	private int surfaceType;
+	private FloorType floorType;
+	private int cellWeight;
 	private int frontPath;
 	private int backPath;
 	private int leftPath;
@@ -32,12 +36,29 @@ public class Tile {
 		setDirtAmount(dirtAmount);	
 		
 	}
+	public int getCellWeight(){
+		
+		if(surfaceType == 3)
+			cellWeight = 3;
+		else if(surfaceType == 2)
+			cellWeight = 2;
+		else if(surfaceType == 1)
+			cellWeight =1;
+		
+		return cellWeight;
+	}
 	
 	public void setSurfaceType(int type){
 		this.surfaceType = type;
 	}
 	public int getSurfaceType(){
 		return surfaceType;
+//		if(surfaceType == 3)
+//		return FloorType.HIGH_PILE;
+//		else if(surfaceType == 2)
+//			return FloorType.LOW_PILE;
+//		else
+//			return FloorType.BARE;
 	}
 	
 	public void setFrontPath(int fp){
