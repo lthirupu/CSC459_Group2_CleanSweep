@@ -26,7 +26,7 @@ public class Tile {
 	private int dirtAmount;
 	
 	public Tile(int surfaceType, int frontPath, int rightPath,
-			int backPath,int leftPath,boolean isChargeStation,int dirtAmount){
+		int backPath,int leftPath,boolean isChargeStation,int dirtAmount){
 		setSurfaceType(surfaceType);
 		setFrontPath(frontPath);
 		setBackPath(backPath);
