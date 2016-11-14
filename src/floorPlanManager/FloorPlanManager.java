@@ -20,6 +20,13 @@ public class FloorPlanManager {
 		}
 		return fpm;
 	}
+	public void setDirt(Coordinate co, int dm){
+		fl.setDirt(co, dm);
+	}
+	public boolean isDirty(Coordinate co){
+		return fl.isDirty(co);
+		
+	}
 	
 	public LinkedList<Vertex> getPath(String start,String destination){
 		FloorMap flm = new FloorMap();
@@ -65,6 +72,10 @@ public class FloorPlanManager {
 	public HashSet<String> getObstacleNeighbor(Coordinate co){
 		
 		return fl.getObstacleNeighbor(co);
+	}
+	
+	public void updatePath(String coor,String orientation, int update){
+		this.fl.updatePath(coor, orientation, update);
 	}
 	public static void main(String args[]){
 		FloorPlanManager fpm = FloorPlanManager.getInstance();

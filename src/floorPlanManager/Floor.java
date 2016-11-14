@@ -105,6 +105,24 @@ public class Floor {
 		return temp;
 		
 	}
+	public void setDirt(Coordinate co, int dm){
+		floorPlan.get(co.getStringXY()).setDirtAmount(dm);
+	}
+	public boolean isDirty(Coordinate co){
+		if(floorPlan.get(co.getStringXY()).getDirtAmount()==1){
+			return true;
+		}
+		return false;
+	}
+	public void updatePath(String coor,String orientation,int update){
+		switch(orientation){
+		case "front": this.floorPlan.get(coor).setFrontPath(update);;
+		case "back": this.floorPlan.get(coor).setBackPath(update);;
+		case "right": this.floorPlan.get(coor).setRightPath(update);;
+		case "left": this.floorPlan.get(coor).setLeftPath(update);;
+		}
+		
+	}
 	public HashSet<String> getObstacleNeighbor(Coordinate co){
 		HashSet<String> temp = new HashSet<String>();
 		if(this.floorPlan.get(co.getStringXY()).getFrontPath()==2){

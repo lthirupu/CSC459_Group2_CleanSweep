@@ -8,7 +8,7 @@ public class SensorAPI {
 	
 	private static Sensor s = Sensor.getInstance();
 	
-	SensorAPI(){
+	public SensorAPI(){
 		s.ManageDirtUnit();
 	}
 	

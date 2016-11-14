@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 
 import floorPlanManager.Coordinate;
@@ -10,24 +11,29 @@ import sensors.SensorAPI;
 
 public class NavigationLogic {
 	private FloorPlanManager fpm = FloorPlanManager.getInstance();
-	private SensorAPI sensor;
+	private SensorAPI sensor ;
 	private Coordinate currentLocation;
-	private Stack<Coordinate> stack;
-	private ArrayList<Coordinate> visited;
-	public NavigationLogic(SensorAPI sensor){
-	
-		this.sensor = sensor;
+	private Stack<String> stack;
+	private ArrayList<String> visited;
+	public NavigationLogic(){
+		sensor = new SensorAPI();
+		stack = new Stack<String>();
+		visited = new ArrayList<String>();
 	}
 	
 	public void start(){
 		
+		
 		currentLocation = fpm.getCurrentLocation();
-		stack.push(currentLocation);
+		System.out.println(currentLocation.getStringXY());
+		stack.push(currentLocation.getStringXY());
 		while(!stack.isEmpty()){
-			Coordinate nextStep = stack.pop();
+			String nextStep = stack.pop();
 			if(!visited.contains(nextStep)){
-				fpm.setCurrentLocation(nextStep.getX(), nextStep.getY());
-				fpm.getOpenNeighbor(nextStep);
+				fpm.setCurrentLocation(currentLocation.getX(),currentLocation.getY());
+				System.out.println("I am at " + fpm.getCurrentLocation().getStringXY());
+				updateAvailablePath();
+				getAvailablePath();
 				visited.add(nextStep);
 			}
 			
@@ -37,31 +43,46 @@ public class NavigationLogic {
 	}
 
 	private void getAvailablePath() {
-		/*if(fpm.getOpenNeighbor(co)==0||fpm.getFrontPath()==1){
-			int[] temp = new int[2];
-			temp[0] = currentLocation[0];
-			temp[1] = currentLocation[1]+1;
-			stack.push(temp);
-			}
-		else if(floorPlan.getRightPath()==0||floorPlan.getRightPath()==1){
-			int[] temp = new int[2];
-			temp[0] = currentLocation[0]+1;
-			temp[1] = currentLocation[1];
-			stack.push(temp);
-			}
-		else if(floorPlan.getBackPath()==0||floorPlan.getBackPath()==1){
-				int[] temp = new int[2];
-				temp[0] = currentLocation[0];
-				temp[1] = currentLocation[1]-1;
-				stack.push(temp);
-				}
-		else if(floorPlan.getLeftPath()==0||floorPlan.getLeftPath()==1){
-					int[] temp = new int[2];
-					temp[0] = currentLocation[0]-1;
-					temp[1] = currentLocation[1];
-					stack.push(temp);
-					}
-					*/
+		HashSet<String> locations = fpm.getOpenNeighbor(currentLocation);
+		for(String location:locations){
+			System.out.println(location);
+			stack.push(location);
+			
+		}
+		
+	}
+
+	private void updateAvailablePath() {
+		if(sensor.frontObstacle()){
+			fpm.updatePath(currentLocation.getStringXY(), "front", 2);
+		}else{
+			fpm.updatePath(currentLocation.getStringXY(), "front", 1);
+		}
+		if(sensor.rightObstacle()){
+			fpm.updatePath(currentLocation.getStringXY(), "right", 2);
+		}else{
+			fpm.updatePath(currentLocation.getStringXY(), "right", 1);
+		}
+		if(sensor.rearObstacle()){
+			fpm.updatePath(currentLocation.getStringXY(), "back", 2);
+		}else{
+			fpm.updatePath(currentLocation.getStringXY(), "back", 1);
+		}
+		if(sensor.leftObstacle()){
+			fpm.updatePath(currentLocation.getStringXY(), "left", 2);
+		}else{
+			fpm.updatePath(currentLocation.getStringXY(), "left", 1);
+		}
+		
+		
+		
+	}
+	public static void main(String[] args){
+		
+		NavigationLogic nv = new NavigationLogic();
+		nv.start();
+		
 	}
 
 }
+
