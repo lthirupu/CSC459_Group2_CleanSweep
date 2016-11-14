@@ -7,6 +7,9 @@ package floorPlanManager;
  * 1 = open
  * 2 = obstacle
  * 4 = stairs 
+ * dirtAmount
+ * 1 = dirty
+ * 0 = clean
  */
 
 public class Tile {
