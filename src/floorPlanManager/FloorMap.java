@@ -58,9 +58,34 @@ public class FloorMap {
 	}
 	public double getCostPath(String start, String destination){
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(this.aGraph);
-		Vertex a = new Vertex(start,start);
-		Vertex b = new Vertex(destination,destination);
-		return dijkstra.getDistance(a, b);
+		LinkedList<Vertex> path = new LinkedList();
+		double cost = 0;
+		for(int i = 0; i< nodes.size();i++){
+			
+			if(start.equals(nodes.get(i).getName())){
+				
+				dijkstra.execute(this.nodes.get(i));
+				}
+			
+		}
+		for(int j = 0; j< nodes.size();j++){
+			
+			if(destination.equals(nodes.get(j).getName())){
+				
+			   path = dijkstra.getPath(nodes.get(j));
+				}
+			
+			
+		}
+		if(path!= null){
+		Vertex current = path.pop();
+		for(Vertex ver: path){
+			cost += dijkstra.getDistance(current, ver);
+			current = ver;
+			
+		}
+		}
+		return cost;
 	}
 	
 	

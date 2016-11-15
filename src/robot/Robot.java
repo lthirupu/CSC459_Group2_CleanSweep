@@ -16,6 +16,7 @@ import sensors.SensorAPI;
 public class Robot {
 	private FloorPlanManager fpm = FloorPlanManager.getInstance();
 	private Coordinate currentLocation;
+	private String chargeStation = "0,0";
 	private Stack<String> stack;
 
 	private ArrayList<String> visited;
@@ -50,8 +51,24 @@ public class Robot {
 			fpm.setCurrentLocation(currentLocation.getX(), currentLocation.getY());
 			if (!visited.contains(nextStep)) {
 				System.out.println("---------------------------");
+				if(!enoughPower()){
+					System.out.println("not enough Power going back to station");
+					
+					LinkedList<Vertex> path = fpm.getPath(currentLocation.getStringXY(), chargeStation);
+					for(Vertex ver: path){
+						nextStep = ver.getName();
+						System.out.println("Cleaner moving to: " + ver);
+						pwm.consumeBattery((int) fpm.getCostPath(current, nextStep));
+						current = ver.getName();
+						currentLocation.setString(current);
+						System.out.println("Now at: " + currentLocation.getStringXY());
+						
+					}
+					pwm.setRemainingBattery(100);
+					
+				}
 
-					//System.out.println(fpm.getCostPath("0,2", "0,0"));
+					//System.out.println(fpm.getCostPath(current, nextStep));;
 					System.out.println("Battery State: " + pwm.getRemainingBattery());
 					System.out.println("Cleaner at: " + current);
 					pwm.consumeBattery(fpm.getSurfaceType(currentLocation));
@@ -65,6 +82,8 @@ public class Robot {
 							System.out.println("Cleaner moving to: " + ver);
 							pwm.consumeBattery((int) fpm.getCostPath(current, nextStep));
 							current = ver.getName();
+							currentLocation.setString(current);
+							System.out.println("Now at: " + currentLocation.getStringXY());
 
 						}
 					}
@@ -90,21 +109,9 @@ public class Robot {
 	}
 
 	private boolean enoughPower() {
-		HashSet<String> chargeStations = new HashSet<String>();
-		chargeStations = fpm.getChargeStaionLocation();
 		int powerLevel = pwm.getRemainingBattery();
-		int cost = 0;
-		for (String charge : chargeStations) {
-			// System.out.println("cost to "+ charge
-			// +fpm.getCostPath(currentLocation.getStringXY(), charge));
-			System.out.println(charge + currentLocation.getStringXY());
-			if (cost == 0 && cost < fpm.getCostPath(currentLocation.getStringXY(), charge)) {
-				cost = (int) fpm.getCostPath(currentLocation.getStringXY(), charge);
-			}
-
-		}
-		System.out.println("cost to go back station: " + cost);
-		if (powerLevel >= cost) {
+		
+		if (powerLevel >= fpm.getCostPath(currentLocation.getStringXY(), chargeStation)) {
 			System.out.println("enough power");
 			return true;
 		}

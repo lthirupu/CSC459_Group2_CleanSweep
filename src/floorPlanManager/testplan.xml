@@ -396,7 +396,7 @@
 	<Front>1</Front>
 	<Right>1</Right>
 	<Back>1</Back>
-	<Left>2</Left>
+	<Left>1</Left>
 	<ChargeStation>0</ChargeStation>
 	<Dirt>0</Dirt>	
 </Tile>
