@@ -46,61 +46,62 @@ public class Robot {
 
 			String nextStep = stack.pop();
 			String current = currentLocation.getStringXY();
-			currentLocation.setString(nextStep);
+			// currentLocation.setString(nextStep);
 
 			fpm.setCurrentLocation(currentLocation.getX(), currentLocation.getY());
 			if (!visited.contains(nextStep)) {
 				System.out.println("---------------------------");
-				if(!enoughPower()){
-					System.out.println("not enough Power going back to station");
-					
+				if (!enoughPower()) {
+					System.out.println("not enough Power going back to station" + "----remaining power: " + pwm.getRemainingBattery());
+
 					LinkedList<Vertex> path = fpm.getPath(currentLocation.getStringXY(), chargeStation);
-					for(Vertex ver: path){
-						nextStep = ver.getName();
+					for (Vertex ver : path) {
+						String tempNext;
+						tempNext = ver.getName();
 						System.out.println("Cleaner moving to: " + ver);
-						pwm.consumeBattery((int) fpm.getCostPath(current, nextStep));
+						pwm.consumeBattery((int) fpm.getCostPath(current, tempNext));
 						current = ver.getName();
 						currentLocation.setString(current);
-						System.out.println("Now at: " + currentLocation.getStringXY());
-						
+						System.out.println("Cleaner now at: " + currentLocation.getStringXY());
+
 					}
 					pwm.setRemainingBattery(100);
-					
+
 				}
 
-					//System.out.println(fpm.getCostPath(current, nextStep));;
-					System.out.println("Battery State: " + pwm.getRemainingBattery());
-					System.out.println("Cleaner at: " + current);
+				// System.out.println(fpm.getCostPath(current, nextStep));;
+				System.out.println("Battery State: " + pwm.getRemainingBattery());
+				System.out.println("Cleaner now at: " + current);
+				// System.out.println("going from " + current + " to " +
+				// nextStep);
+				LinkedList<Vertex> paths = fpm.getPath(current, nextStep);
+				if (paths != null) {
+					paths.pop();
+					String tempNext;
+					for (Vertex ver : paths) {
+						tempNext = ver.getName();
+						System.out.println("Cleaner moving to: " + ver);
+						pwm.consumeBattery((int) fpm.getCostPath(current, tempNext));
+						current = ver.getName();
+						currentLocation.setString(current);
+						System.out.println("Cleaner now at: " + currentLocation.getStringXY());
+
+					}
+				}
+				// System.out.println("im at " +nextStep);
+				if (fpm.isDirty(currentLocation)) {
+					clm.removeLoad();
 					pwm.consumeBattery(fpm.getSurfaceType(currentLocation));
-					// System.out.println("going from " + current + " to " +
-					// nextStep);
-					LinkedList<Vertex> paths = fpm.getPath(current, nextStep);
-					if (paths != null) {
-						paths.pop();
-						for (Vertex ver : paths) {
-							nextStep = ver.getName();
-							System.out.println("Cleaner moving to: " + ver);
-							pwm.consumeBattery((int) fpm.getCostPath(current, nextStep));
-							current = ver.getName();
-							currentLocation.setString(current);
-							System.out.println("Now at: " + currentLocation.getStringXY());
+					System.out.println("cleaning at " + nextStep);
+					fpm.setDirt(currentLocation, 1);
+					System.out.println("All Cleaned: " + clm.isAllCleaned());
+					System.out.println("---------------------------");
+				}
+				// System.out.println("I am at " +
+				// fpm.getCurrentLocation().getStringXY());
+				getAvailablePath();
 
-						}
-					}
-					// System.out.println("im at " +nextStep);
-					if (fpm.isDirty(currentLocation)) {
-						clm.removeLoad();
-						System.out.println("cleaning at " + nextStep);
-						fpm.setDirt(currentLocation, 1);
-						System.out.println(clm.isAllCleaned());
-						System.out.println("---------------------------");
-					}
-					// System.out.println("I am at " +
-					// fpm.getCurrentLocation().getStringXY());
-					getAvailablePath();
-
-					visited.add(nextStep);
-			
+				visited.add(nextStep);
 
 			}
 
@@ -110,7 +111,7 @@ public class Robot {
 
 	private boolean enoughPower() {
 		int powerLevel = pwm.getRemainingBattery();
-		
+
 		if (powerLevel >= fpm.getCostPath(currentLocation.getStringXY(), chargeStation)) {
 			System.out.println("enough power");
 			return true;
