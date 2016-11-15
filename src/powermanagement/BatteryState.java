@@ -2,7 +2,7 @@ package powermanagement;
 
 public class BatteryState {
 	private int battery;
-	
+
 	private static BatteryState instance;
 	public BatteryState(){
 		this.setBattery(100);
@@ -21,5 +21,5 @@ public class BatteryState {
 		}
 		return instance;
 	}
-	
+
 }
