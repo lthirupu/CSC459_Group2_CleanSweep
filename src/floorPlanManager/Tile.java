@@ -8,8 +8,8 @@ package floorPlanManager;
  * 2 = obstacle
  * 4 = stairs 
  * dirtAmount
- * 1 = dirty
- * 0 = clean
+ * 0 = dirty
+ * 1 = clean
  */
 
 import powermanagement.FloorType;

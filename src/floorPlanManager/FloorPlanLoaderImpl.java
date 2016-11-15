@@ -15,13 +15,13 @@ import org.w3c.dom.NodeList;
 public class FloorPlanLoaderImpl implements FloorPlanLoader {
 	Hashtable<String,Tile> info = new Hashtable<String,Tile>();
 	@Override
-	public Hashtable<String, Tile> loadFloorPlan() {
+	public Hashtable<String, Tile> loadFloorPlan(String file) {
 
 		try{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			File xml = new File("src/floorPlanManager/floorplan.xml");
+			File xml = new File("src/floorPlanManager/"+ file);
 			Document doc = db.parse(xml);
 			doc.getDocumentElement().normalize();
 
@@ -57,9 +57,9 @@ public class FloorPlanLoaderImpl implements FloorPlanLoader {
 					charge = false;
 				else
 					charge = true;
-				String dirtAmount = elem.getElementsByTagName("Back").item(0).getTextContent();
+				String dirtAmount = elem.getElementsByTagName("Dirt").item(0).getTextContent();
 
-				Tile tile = new Tile(Integer.parseInt(surfaceType),Integer.parseInt(frontPath),Integer.parseInt(backPath),Integer.parseInt(leftPath),Integer.parseInt(rightPath),charge,Integer.parseInt(dirtAmount));
+				Tile tile = new Tile(Integer.parseInt(surfaceType),Integer.parseInt(frontPath),Integer.parseInt(rightPath),Integer.parseInt(backPath),Integer.parseInt(leftPath),charge,Integer.parseInt(dirtAmount));
 
 				info.put(tileName, tile);
 

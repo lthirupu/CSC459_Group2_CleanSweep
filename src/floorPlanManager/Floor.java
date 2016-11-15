@@ -73,6 +73,7 @@ public class Floor {
 			String left = (co.getX()-1)+"," + co.getY();
 			temp.add(left);
 		}
+		//System.out.println("open :" + temp);
 		return temp;
 		
 	}
@@ -109,7 +110,7 @@ public class Floor {
 		floorPlan.get(co.getStringXY()).setDirtAmount(dm);
 	}
 	public boolean isDirty(Coordinate co){
-		if(floorPlan.get(co.getStringXY()).getDirtAmount()==1){
+		if(floorPlan.get(co.getStringXY()).getDirtAmount()==0){
 			return true;
 		}
 		return false;

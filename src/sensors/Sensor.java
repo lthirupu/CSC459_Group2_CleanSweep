@@ -1,14 +1,22 @@
 package sensors;
 
+import java.util.Hashtable;
+
 /*
  * This module is created to read data from sensors.
  */
 
 import java.util.Random;
 
-  class Sensor {
+import floorPlanManager.FloorPlanLoaderImpl;
+import floorPlanManager.Tile;
 
-	private static Sensor sensor = new Sensor( );
+  class Sensor {
+	
+	private FloorPlanLoaderImpl loader = new FloorPlanLoaderImpl();
+	private Hashtable<String,Tile> fl = loader.loadFloorPlan("testplan.xml");
+
+	private static Sensor sensor = new Sensor();
 	private static int powerLevel = 100 ;
 	static boolean fullFlag = false;
 	
@@ -76,8 +84,8 @@ import java.util.Random;
 		return sensor;
 	}
 	
-	public boolean frontObstacle() {
-		if (obstacleFound()) {
+	public boolean frontObstacle(String co) {
+		if (fl.get(co).getFrontPath()==2) {
 			setFrontSensor(true);
 			return true;
 		}
@@ -85,8 +93,8 @@ import java.util.Random;
 			return false;
 	}
 	
-	public boolean rearObstacle() {
-		if (obstacleFound()) {
+	public boolean rearObstacle(String co) {
+		if (fl.get(co).getBackPath()==2) {
 			setRearSensor(true);
 			return true;
 		}
@@ -95,8 +103,8 @@ import java.util.Random;
 
 	}
 	
-	public boolean leftObstacle() {
-		if (obstacleFound()) {
+	public boolean leftObstacle(String co) {
+		if (fl.get(co).getLeftPath()==2) {
 			setLeftSensor(true);
 			return true;
 		}
@@ -105,8 +113,8 @@ import java.util.Random;
 
 	}
 
-	public boolean rightObstacle() {
-		if (obstacleFound()) {
+	public boolean rightObstacle(String co) {
+		if (fl.get(co).getRightPath()==2) {
 			setRightSensor(true);
 			return true;
 		}

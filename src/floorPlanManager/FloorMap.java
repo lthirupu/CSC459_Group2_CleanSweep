@@ -6,7 +6,7 @@ public class FloorMap {
 	private List<Edge> edges = new ArrayList<Edge>();
 	private Graph aGraph;
 	public FloorMap(){
-	 System.out.println("in floor map constructor");;
+	// System.out.println("in floor map constructor");;
 	}
 	public void createFloorMap(){
 		Floor fl = Floor.getInstance();	

@@ -7,11 +7,7 @@ import sensors.*;
 public class MovingDirections {
 
 	public void findObstacles(SensorAPI sensor){
-		sensor.stairsObstacle();
-		sensor.frontObstacle();
-		sensor.rearObstacle();
-		sensor.leftObstacle();
-		sensor.rightObstacle();
+		
 	}
 
 	public String getDirections(FloorPlanManager floorPlan, SensorAPI sensor) {

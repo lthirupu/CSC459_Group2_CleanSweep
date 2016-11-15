@@ -1,6 +1,6 @@
 package cleanManager;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import floorPlanManager.Coordinate;
 import floorPlanManager.FloorPlanManager;
@@ -37,16 +37,16 @@ public class CleanManager {
 	}
 	public boolean isAllCleaned(){
 		FloorPlanManager fpm = FloorPlanManager.getInstance();
-		HashSet<String> allLocation = (HashSet<String>) fpm.getAllCoordinates();
-		allLocation.remove(fpm.getCurrentLocation().getStringXY());
+		Set<String> allLocation = fpm.getAllCoordinates();
 		for(String location: allLocation){
 			Coordinate co = new Coordinate();
 			co.setString(location);
-			if(fpm.getPath(fpm.getCurrentLocation().getStringXY(), location)!=null&&fpm.isDirty(co)){
+			if(fpm.isDirty(co)){
 				return false;
 			}
 			
 		}
+		
 		return true;
 	}
 }

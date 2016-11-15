@@ -17,16 +17,16 @@ public class SensorAPI {
 	 * 
 	 *
 	 */
-	public boolean frontObstacle(){
-		return s.frontObstacle();
+	public boolean frontObstacle(String co){
+		return s.frontObstacle(co);
 	}
 	/**
 	 * Return true if there is an obstacle in rear and false otherwise.
 	 * 
 	 *
 	 */
-	public boolean rearObstacle(){
-		return s.rearObstacle();
+	public boolean rearObstacle(String co){
+		return s.rearObstacle(co);
 	}
 	/**
 	 * Return true if there is an obstacle in right and false otherwise.
@@ -34,16 +34,16 @@ public class SensorAPI {
 	 *
 	 */
 	
-	public boolean rightObstacle(){
-		return s.rightObstacle();
+	public boolean rightObstacle(String co){
+		return s.rightObstacle(co);
 	}
 	/**
 	 * Return true if there is an obstacle in left and false otherwise.
 	 * 
 	 *
 	 */
-	public boolean leftObstacle(){
-		return s.leftObstacle();
+	public boolean leftObstacle(String co){
+		return s.leftObstacle(co);
 	}
 	/**
 	 * Return true if there is an obstacle in stairs and false otherwise.

@@ -11,7 +11,7 @@ public class FloorPlanManager {
 	private FloorPlanManager(){	
 		FloorPlanLoader fpl = new FloorPlanLoaderImpl();
 		
-		fl.loadFloorPlan(fpl.loadFloorPlan());
+		fl.loadFloorPlan(fpl.loadFloorPlan("testplan.xml"));
 		
 	}
 	public static synchronized FloorPlanManager getInstance(){
@@ -81,15 +81,15 @@ public class FloorPlanManager {
 		FloorPlanManager fpm = FloorPlanManager.getInstance();
 		Coordinate co = new Coordinate();
 		co.setString("0,0");
-		Tile tile1 = new Tile(1, 0, 1, 1, 0, false, 0);
-		Tile tile2 = new Tile(2, 0, 1, 1, 1, false, 0);
-		Tile tile3 = new Tile(3, 0, 0, 1, 1, false, 0);
-		Tile tile4 = new Tile(1, 1, 1, 1, 0, false, 0);
+		Tile tile1 = new Tile(1, 2, 1, 1, 2, false, 0);
+		Tile tile2 = new Tile(2, 2, 1, 1, 1, false, 0);
+		Tile tile3 = new Tile(3, 2, 2, 1, 1, false, 0);
+		Tile tile4 = new Tile(1, 1, 1, 1, 2, false, 0);
 		Tile tile5 = new Tile(2, 1, 1, 1, 1, false, 0);
-		Tile tile6 = new Tile(3, 1, 0, 1, 1, false, 0);
-		Tile tile7 = new Tile(1, 1, 1, 0, 0, false, 0);
-		Tile tile8 = new Tile(2, 1, 1, 0, 1, false, 0);
-		Tile tile9 = new Tile(3, 1, 0, 0, 1, false, 0);
+		Tile tile6 = new Tile(3, 1, 2, 1, 1, false, 0);
+		Tile tile7 = new Tile(1, 1, 1, 2, 2, false, 0);
+		Tile tile8 = new Tile(2, 1, 1, 2, 1, false, 0);
+		Tile tile9 = new Tile(3, 1, 2, 2, 1, false, 0);
 		//System.out.println(fpm.getUnkownNeighbor(co));;
 		
 		//System.out.println(fpm.getAllCoordinates());
