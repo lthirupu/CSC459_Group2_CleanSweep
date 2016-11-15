@@ -27,6 +27,9 @@ public class FloorPlanManager {
 		return fl.isDirty(co);
 		
 	}
+	public boolean isChargeStation(Coordinate co){
+		return this.fl.isChargeStation(co);
+	}
 	
 	public LinkedList<Vertex> getPath(String start,String destination){
 		FloorMap flm = new FloorMap();
@@ -34,6 +37,12 @@ public class FloorPlanManager {
 		flm.createFloorMap();
 		result = flm.getPath(start, destination);
 		return result;
+	}
+	public double getCostPath(String start,String destination){
+		FloorMap flm = new FloorMap();
+		flm.createFloorMap();
+		return flm.getCostPath(start, destination);
+		
 	}
 	public void updateTile(String location, Tile tile){
 		this.fl.updateTile(location, tile);

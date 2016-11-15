@@ -23,6 +23,9 @@ public class Floor {
 		chargeStations = new HashSet<String>();
 		
 	}
+	public boolean isChargeStation(Coordinate co){
+		return this.floorPlan.get(co.getStringXY()).getChargeStation();
+	}
 	
 	public Set<String> getAllCoordinates(){
 		return this.floorPlan.keySet();

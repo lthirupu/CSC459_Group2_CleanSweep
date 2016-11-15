@@ -53,14 +53,15 @@ public class FloorPlanLoaderImpl implements FloorPlanLoader {
 				String isChargeStation = elem.getElementsByTagName("ChargeStation").item(0).getTextContent();
 				String leftPath = elem.getElementsByTagName("Left").item(0).getTextContent();
 				boolean charge;
-				if(isChargeStation == "0")
-					charge = false;
-				else
+				if(isChargeStation.equals("0")){
+					charge = false;}
+				else{
 					charge = true;
+				}
 				String dirtAmount = elem.getElementsByTagName("Dirt").item(0).getTextContent();
 
 				Tile tile = new Tile(Integer.parseInt(surfaceType),Integer.parseInt(frontPath),Integer.parseInt(rightPath),Integer.parseInt(backPath),Integer.parseInt(leftPath),charge,Integer.parseInt(dirtAmount));
-
+				//System.out.println(charge);
 				info.put(tileName, tile);
 
 

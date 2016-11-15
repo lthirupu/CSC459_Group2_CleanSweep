@@ -6,7 +6,7 @@ public class PowerManagement {
 	
 	public PowerManagement(VacuumManager manager){
 		maxBattery = 100;
-		remainingBattery = maxBattery;
+		remainingBattery = 100;
 	}
 public void setRemainingBattery(int remainingBattery){
 	if(remainingBattery>= 0 && remainingBattery <=100)
@@ -14,6 +14,10 @@ public void setRemainingBattery(int remainingBattery){
 }
 public int getRemainingBattery(){
 	return remainingBattery;
+}
+public void consumeBattery(int amount){
+	this.remainingBattery -= amount;
+	
 }
 
 public int getBattery(){

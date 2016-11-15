@@ -56,5 +56,12 @@ public class FloorMap {
 	
 		 return path;
 	}
+	public double getCostPath(String start, String destination){
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(this.aGraph);
+		Vertex a = new Vertex(start,start);
+		Vertex b = new Vertex(destination,destination);
+		return dijkstra.getDistance(a, b);
+	}
+	
 	
 }
