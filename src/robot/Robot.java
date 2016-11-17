@@ -55,8 +55,9 @@ public class Robot {
 					System.out.println("not enough Power going back to station" + "----remaining power: " + pwm.getRemainingBattery());
 
 					LinkedList<Vertex> path = fpm.getPath(currentLocation.getStringXY(), chargeStation);
+					String tempNext;
 					for (Vertex ver : path) {
-						String tempNext;
+						
 						tempNext = ver.getName();
 						System.out.println("Cleaner moving to: " + ver);
 						pwm.consumeBattery((int) fpm.getCostPath(current, tempNext));
