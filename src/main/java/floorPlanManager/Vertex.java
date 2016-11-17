@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 public class Vertex {
 	final private String id;
 	  final private String name;

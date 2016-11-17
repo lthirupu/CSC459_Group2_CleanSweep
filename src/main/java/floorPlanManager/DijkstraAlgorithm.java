@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 
 import java.util.*;
 

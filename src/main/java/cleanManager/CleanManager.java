@@ -1,9 +1,9 @@
-package cleanManager;
+package main.java.cleanManager;
 
 import java.util.Set;
 
-import floorPlanManager.Coordinate;
-import floorPlanManager.FloorPlanManager;
+import main.java.floorPlanManager.Coordinate;
+import main.java.floorPlanManager.FloorPlanManager;
 
 public class CleanManager {
 	private static CleanManager clm = null;
