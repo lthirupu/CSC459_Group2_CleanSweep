@@ -1,4 +1,6 @@
-package robot;
+package main;
+
+import robot.Robot;
 
 public class Main {
 
