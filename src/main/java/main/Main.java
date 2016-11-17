@@ -1,6 +1,6 @@
-package main;
+package main.java.main;
 
-import robot.Robot;
+import main.java.robot.Robot;
 
 public class Main {
 

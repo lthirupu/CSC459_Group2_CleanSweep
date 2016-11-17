@@ -1,16 +1,16 @@
-package robot;
+package main.java.robot;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import cleanManager.CleanManager;
-import floorPlanManager.Coordinate;
-import floorPlanManager.FloorPlanManager;
-import floorPlanManager.Vertex;
-import powermanagement.PowerManagement;
-import powermanagement.VacuumManager;
+import main.java.cleanManager.CleanManager;
+import main.java.floorPlanManager.Coordinate;
+import main.java.floorPlanManager.FloorPlanManager;
+import main.java.floorPlanManager.Vertex;
+import main.java.powermanagerment.PowerManagement;
+import main.java.powermanagerment.VacuumManager;
 
 public class Robot {
 	

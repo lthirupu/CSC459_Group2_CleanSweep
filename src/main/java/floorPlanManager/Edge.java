@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 
 public class Edge {
 	private final String id; 

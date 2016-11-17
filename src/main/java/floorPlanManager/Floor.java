@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 
 
 import java.util.ArrayList;
@@ -148,8 +148,6 @@ public class Floor {
 		return temp;
 		
 	}
-	public static void main(String args[]){
-		
-	}
+	
 
 }

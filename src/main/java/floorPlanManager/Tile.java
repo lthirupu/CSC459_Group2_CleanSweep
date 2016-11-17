@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 /*FloorType:
  * 1 represent bare floor, 2 represent low-pile,
  * 3 represent high-pile
@@ -12,7 +12,7 @@ package floorPlanManager;
  * 1 = clean
  */
 
-import powermanagement.FloorType;
+import main.java.powermanagerment.FloorType;
 
 public class Tile {
 	private int surfaceType;

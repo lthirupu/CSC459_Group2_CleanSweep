@@ -1,4 +1,4 @@
-package powermanagement;
+package main.java.powermanagerment;
 
 public class BatteryState {
 	private int battery;

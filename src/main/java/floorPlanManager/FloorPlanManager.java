@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -86,10 +86,5 @@ public class FloorPlanManager {
 	public void updatePath(String coor,String orientation, int update){
 		this.fl.updatePath(coor, orientation, update);
 	}
-	public static void main(String args[]){
-		FloorPlanManager fpm = FloorPlanManager.getInstance();
-		Coordinate co = new Coordinate();
-		System.out.println(fpm.getCostPath("0,0", "4,3"));
-		
-	}
+	
 }

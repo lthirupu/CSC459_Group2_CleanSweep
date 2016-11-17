@@ -1,4 +1,4 @@
-package floorPlanManager;
+package main.java.floorPlanManager;
 
 import java.io.File;
 import java.util.Hashtable;
@@ -21,7 +21,7 @@ public class FloorPlanLoaderImpl implements FloorPlanLoader {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			File xml = new File("src/floorPlanManager/"+ file);
+			File xml = new File("src/main/java/floorPlanManager/"+ file);
 			Document doc = db.parse(xml);
 			doc.getDocumentElement().normalize();
 
@@ -98,13 +98,7 @@ public class FloorPlanLoaderImpl implements FloorPlanLoader {
 
 	}
 
-	public static void main(String args[]){
-		FloorPlanLoaderImpl fpl = new FloorPlanLoaderImpl();
-		Hashtable<String, Tile> a = fpl.loadSample();
-		System.out.println(a);
-
-	}
-
+	
 
 
 }
