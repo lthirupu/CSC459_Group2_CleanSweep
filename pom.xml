@@ -29,7 +29,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>CSC459_Group2_CleanSweep.main.Main</mainClass>
+					<mainClass>main.java.main.Main</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
